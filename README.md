@@ -19,4 +19,4 @@ This service makes use of a Continuous Deployement from Azure DevOps by making u
 
 Build Pipeline: My build pipeline "builds" to take care of tasks such as handling dependencies, compiling code, etc, when I make new commits to the devop and master branches. This triggers a build artifact.
 
-Release Pipeline: I use the release pipline to take the artifact that my build pipeline triggers and then deploys it to my Azure Web App, Babra-Makeup-App. It is used to automate the release/publishing of the changes made.
+Release Pipeline: I use the release pipline to take the artifact that my build pipeline triggers and then deploy it to my Azure Web App, Babra-Makeup-App. It is used to automate the release/publishing of the changes I commit.
