@@ -19,22 +19,24 @@ const theme = createMuiTheme({
 
 function App() {
   const [UserInput, setUserInput] = useState<IUserInput>({
-    SearchQuery: "Mars",
-    StartDate: new Date("2014-08-18T21:11:54"),
-    EndDate: new Date("2018-08-18T21:11:54"),
+    SearchQuery: "Maybelline",
   });
   function SetUserInput(a: IUserInput) {
     setUserInput(a);
   }
   return (
     <div className="App">
+      <div className="App-title">
+        Queeen
+        <img
+          src={require("./Icons/makeup.png")}
+          alt="Queeen"
+          className="App-logo"
+        />
+      </div>
       <MuiThemeProvider theme={theme}>
         <SearchBar SetUserInput={(a: IUserInput) => SetUserInput(a)} />
-        <MediaGrid
-          SearchQuery={UserInput.SearchQuery}
-          StartDate={UserInput.StartDate}
-          EndDate={UserInput.EndDate}
-        />
+        <MediaGrid SearchQuery={UserInput.SearchQuery} />
       </MuiThemeProvider>
     </div>
   );

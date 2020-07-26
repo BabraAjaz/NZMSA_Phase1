@@ -3,15 +3,8 @@ import MediaCard from "../MediaCardComponent/MediaCard";
 import { Grid } from "@material-ui/core";
 import "./MediaGrid.css";
 
-interface IState {
-  links: any[];
-  data: any[];
-}
-
 interface IMediaGridProps {
   SearchQuery: string | null;
-  StartDate: Date | null;
-  EndDate: Date | null;
 }
 
 function MediaGrid(props: IMediaGridProps) {
@@ -27,7 +20,7 @@ function MediaGrid(props: IMediaGridProps) {
         setItemArray(response);
       })
       .catch((error) => console.error(error));
-  }, [props.SearchQuery, props.EndDate, props.StartDate]);
+  }, [props.SearchQuery]);
 
   var Cards: JSX.Element[] = [];
   ItemArray.forEach((value: any, i: number) => {

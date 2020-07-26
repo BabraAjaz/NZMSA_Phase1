@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import { IUserInput } from "../../Common/Interfaces";
 import "./SearchBar.css";
-import { TextField, Grid, Button } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
 interface ISearchBarProps {
   SetUserInput: (a: IUserInput) => void;
 }
@@ -23,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 120,
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
   select: {
     minWidth: 180,
+  },
+  Button: {
+    marginTop: "20px",
   },
 }));
 
@@ -102,17 +96,6 @@ function SearchBar(props: ISearchBarProps) {
   };
 
   const [HasFocus, setHasFocus] = useState<boolean>(false);
-  const [StartDate, setStartDate] = useState<Date | null>(
-    new Date("2014-08-18")
-  );
-  const handleStartDateChange = (date: Date | null) => {
-    setStartDate(date);
-  };
-
-  const [EndDate, setEndDate] = useState<Date | null>(new Date("2020-08-18"));
-  const handleEndDateChange = (date: Date | null) => {
-    setEndDate(date);
-  };
 
   const handleSubmit = () => {
     if (
@@ -122,8 +105,6 @@ function SearchBar(props: ISearchBarProps) {
     ) {
       let UserInput: IUserInput = {
         SearchQuery: SearchQuery,
-        StartDate: StartDate,
-        EndDate: EndDate,
       };
       props.SetUserInput(UserInput);
     } else {
@@ -132,20 +113,17 @@ function SearchBar(props: ISearchBarProps) {
   };
 
   return (
-    <div className="SearchBarContainer">
-      <Grid container spacing={3}>
+    <div className="SearchBar">
+      <div className="SearchBarContainer">
         <Grid item xs={6} sm={3}>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              Brand
-            </InputLabel>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-filled-label">Brand</InputLabel>
             <Select
               className={classes.select}
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={SearchQuery}
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={!!SearchQuery ? SearchQuery : "Maybelline"}
               onChange={(e) => handleSearchQueryChange(e.target.value)}
-              label="Brand"
             >
               <MenuItem value="">
                 <em>None</em>
@@ -156,40 +134,16 @@ function SearchBar(props: ISearchBarProps) {
             </Select>
           </FormControl>
         </Grid>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid item xs={6} sm={3}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="StartDate"
-              label="Start Date (optional)"
-              value={StartDate}
-              onChange={handleStartDateChange}
-              KeyboardButtonProps={{ "aria-label": "change date" }}
-            />
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="EndDate"
-              label="End Date (optional)"
-              value={EndDate}
-              onChange={handleEndDateChange}
-              KeyboardButtonProps={{ "aria-label": "change date" }}
-            />
-          </Grid>
-        </MuiPickersUtilsProvider>
-        <Grid item xs={6} sm={3}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
+        <Button
+          className={classes.Button}
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </div>
+      {!!SearchQuery ? SearchQuery : "Maybelline"}
     </div>
   );
 }
