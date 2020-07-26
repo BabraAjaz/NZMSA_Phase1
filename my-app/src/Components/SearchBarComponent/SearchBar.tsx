@@ -84,7 +84,6 @@ function SearchBar(props: ISearchBarProps) {
     "Suncoat",
     "W3llpeople",
     "Wet n Wild",
-    "Zorah",
     "Zorah Biocosmetiques",
   ];
 
