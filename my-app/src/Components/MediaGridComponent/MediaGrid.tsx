@@ -12,7 +12,8 @@ function MediaGrid(props: IMediaGridProps) {
 
   useEffect(() => {
     fetch(
-      "http://makeup-api.herokuapp.com/api/v1/products.json?brand=" +
+      "https://cors-anywhere.herokuapp.com/" +
+        "http://makeup-api.herokuapp.com/api/v1/products.json?brand=" +
         props.SearchQuery
     )
       .then((response) => response.json())
